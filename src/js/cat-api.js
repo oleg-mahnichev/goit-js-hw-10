@@ -15,8 +15,6 @@ export const fetchBreeds = async () => {
         return response.data;
     } catch (error) {
         loaderElement.style.display = "none";
-        const errorElement = document.querySelector(".error");
-        errorElement.textContent = "Oops! Something went wrong! Try reloading the page!";
         errorElement.style.display = "block";
     }
 };
@@ -29,8 +27,6 @@ export const fetchCatByBreed = async (breedId) => {
         return response.data;
     } catch (error) {
         loaderElement.style.display = "none";
-        const errorElement = document.querySelector(".error");
-        errorElement.textContent = "Oops! Something went wrong! Try reloading the page!";
         errorElement.style.display = "block";
     }
 };
