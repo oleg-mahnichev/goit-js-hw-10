@@ -1,13 +1,14 @@
 import { fetchBreeds, fetchCatByBreed } from "./cat-api.js";
+import SlimSelect from 'slim-select';
 
 const breedSelect = document.querySelector(".breed-select");
 const loader = document.querySelector(".loader");
 const error = document.querySelector(".error");
 const catInfo = document.querySelector(".cat-info");
 
+let slimSelect; // Оголошуємо змінну slimSelect
 
 function populateBreeds() {
-    loader.classList.add("loading");
     fetchBreeds()
         .then(breeds => {
             breeds.forEach(breed => {
@@ -16,11 +17,18 @@ function populateBreeds() {
                 option.text = breed.name;
                 breedSelect.appendChild(option);
             });
+
+            if (slimSelect) {
+                slimSelect.setData(breedSelect);
+            } else {
+                slimSelect = new SlimSelect({
+                    select: '#single'
+                });
+            }
+
             loader.classList.remove("loading");
-            breedSelect.disabled = false;
         })
         .catch(() => {
-            loader.classList.remove("loading");
             error.classList.add("error-state");
         });
 }
@@ -31,7 +39,7 @@ function displayCatInfo() {
     catInfo.innerHTML = "";
 
     const loadingText = document.createElement("p");
-    loadingText.textContent = "Loading data, please wait...";
+    loadingText.classList.add("loading");
     catInfo.appendChild(loadingText);
 
     fetchCatByBreed(breedId)
@@ -61,12 +69,12 @@ function displayCatInfo() {
             loader.classList.remove("loading");
         })
         .catch(() => {
-            loader.classList.remove("loading");
-            error.classList.add("error-state");
+            loaderElement.classList.remove("loading");
+            errorElement.classList.add("error-state");
+
         });
 }
 
 breedSelect.addEventListener("change", displayCatInfo);
-
 
 populateBreeds();

@@ -1,3 +1,97 @@
 .error {
   display: none;
+  font-weight: 700;
+  color: red;
+}
+.loader {
+  font-weight: 700;
+}
+
+.loading {
+  position: relative;
+  width: 40px;
+  height: 60px;
+  animation: heartBeat 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.loading:before,
+.loading:after {
+  content: '';
+  background: #ff3d00;
+  width: 40px;
+  height: 60px;
+  border-radius: 50px 50px 0 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: rotate(45deg);
+  transform-origin: 50% 68%;
+  box-shadow: 5px 4px 5px #0004 inset;
+}
+.loading:after {
+  transform: rotate(-45deg);
+}
+@keyframes heartBeat {
+  0% {
+    transform: scale(0.95);
+  }
+  5% {
+    transform: scale(1.1);
+  }
+  39% {
+    transform: scale(0.85);
+  }
+  45% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+/* Стилі для контейнера Slim Select */
+.slim-select {
+  position: relative;
+  display: inline-block;
+}
+
+/* Стилі для випадаючого списку */
+.slim-select .ss-list {
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Стилі для пунктів списку */
+.slim-select .ss-list .ss-option {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* Стилі для вибраного елемента */
+.slim-select .ss-single-selected {
+  display: block;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Стилі для стрілки розкриття списку */
+.slim-select .ss-arrow {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
